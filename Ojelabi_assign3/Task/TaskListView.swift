@@ -13,6 +13,3 @@ struct TaskListView: View {
     }
 }
 
-#Preview {
-    TaskListView()
-}

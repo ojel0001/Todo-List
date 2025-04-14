@@ -6,13 +6,38 @@
 //
 
 import SwiftUI
+import SwiftData
 
-struct Task: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+@Model
+final class Task {
+    var id: String
+    var title: String
+    var notes: String?
+    var dueDate: Date?
+    var location: String?
+    var category: String?
+    var isDone: Bool
+    var userId: String
+    
+    init(
+        id: String,
+        title: String,
+        notes: String? = nil,
+        dueDate: Date? = nil,
+        location: String? = nil,
+        category: String? = nil,
+        isDone: Bool = false,
+        userId: String
+    ){
+        
+        self.id = id
+        self.title = title
+        self.notes = notes
+        self.dueDate = dueDate
+        self.location = location
+        self.category = category
+        self.isDone = isDone
+        self.userId = userId
     }
 }
 
-#Preview {
-    Task()
-}

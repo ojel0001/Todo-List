@@ -6,6 +6,17 @@
 //
 
 import SwiftUI
+import FirebaseCore
+
+class AppDelegate: NSObject, UIApplicationDelegate {
+    func application (_application: UIApplication,
+                     didFinishLaunchWithOptions launchOptions:
+                      [UIApplication.LaunchOptionsKey : Any]? = nil) ->Bool{
+                     FirebaseApp.configure()
+                     return true
+    }
+}
+
 
 @main
 struct Ojelabi_assign3App: App {

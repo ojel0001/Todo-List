@@ -6,13 +6,23 @@
 //
 
 import SwiftUI
+import SwiftData
 
-struct Profile: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
+@Model
+ final class Profile {
+    var name: String
+    var email: String
+    var userId: String
+    
+    init(name: String,
+         email: String,
+         userId: String
+    
+    ) {
+        
+         self.name = name
+         self.email = email
+         self.userId = userId
+     }
 }
 
-#Preview {
-    Profile()
-}
