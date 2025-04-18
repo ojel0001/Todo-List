@@ -59,7 +59,7 @@ struct TaskDetailView: View {
                             Label ("Delete Task", systemImage: "trash")
                         }
                     } label: {
-                        Image(systemName: "ellipse.circle")
+                        Image(systemName: "ellipsis.circle")
                     }
                 }
             }

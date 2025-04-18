@@ -15,7 +15,7 @@ struct MainTabView: View {
         TabView{
             TaskListView(userId: userId)
                 .tabItem {
-                    Label ("Tasks", systemImage: "checkList")
+                    Label ("Tasks", systemImage: "checklist")
                     
                 }
             

@@ -19,7 +19,6 @@ import SwiftData
          userId: String
     
     ) {
-        
          self.name = name
          self.email = email
          self.userId = userId

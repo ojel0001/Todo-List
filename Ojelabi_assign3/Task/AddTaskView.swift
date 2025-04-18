@@ -12,7 +12,7 @@ import SwiftData
 struct AddTaskView : View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
-    let usedId: String
+    let userId: String
     
     @State private var title = ""
     @State private var notes = ""
@@ -43,15 +43,16 @@ struct AddTaskView : View {
                         
                     }
                     Section {
-                        Button ("Create Task") {
-                            let task = Task (id: UUID().uuidString,
-                                             title:title,
-                                             notes: notes.isEmpty ? nil: notes,
-                                             dueDate:showDatePicker ? dueDate: nil,
-                                             location: location.isEmpty ? nil : location,
-                                             category: category.isEmpty ? nil : category,
-                                             isDone: false,
-                                             userId:usedId
+                        Button("Create Task") {
+                            let task = Task(
+                                id: UUID().uuidString,
+                                title: title,
+                                notes: notes.isEmpty ? nil : notes,
+                                dueDate: showDatePicker ? dueDate : nil,
+                                location: location.isEmpty ? nil : location,
+                                category: category.isEmpty ? nil : category,
+                                isDone: false,
+                                userId: userId
                             )
                             modelContext.insert(task)
                             dismiss()
