@@ -11,6 +11,7 @@ import SwiftData
 struct TaskListView: View {
     @Query(sort: \Task.dueDate, order: .forward) private var tasks: [Task]
     @Environment(\.modelContext) private var modelContext
+    @StateObject private var firestoreService = FirestoreTaskService()
     let userId: String
     
     
@@ -39,7 +40,9 @@ struct TaskListView: View {
                             }
                         }
                         .onDelete { indices in
-                            indices.forEach { modelContext.delete(overdueTasks[$0]) }
+                            indices.forEach {
+                                firestoreService.deleteTask(overdueTasks[$0])
+                                modelContext.delete(overdueTasks[$0]) }
                         }
                     } header: {
                         Text("Overdue (\(overdueTasks.count))")
@@ -56,7 +59,9 @@ struct TaskListView: View {
                         }
                     }
                     .onDelete { indices in
-                        indices.forEach { modelContext.delete(incompleteTasks[$0]) }
+                        indices.forEach {
+                            firestoreService.deleteTask(incompleteTasks[$0])
+                            modelContext.delete(incompleteTasks[$0]) }
                     }
                 } header: {
                     Text("To Do (\(incompleteTasks.count))")
@@ -72,7 +77,9 @@ struct TaskListView: View {
                             }
                         }
                         .onDelete { indices in
-                            indices.forEach { modelContext.delete(completedTasks[$0]) }
+                            indices.forEach {
+                                firestoreService.deleteTask(completedTasks[$0])
+                                modelContext.delete(completedTasks[$0]) }
                         }
                     } header: {
                         Text("Completed (\(completedTasks.count))")

@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 @Model
-final class Task {
+ class Task {
     var id: String
     var title: String
     var notes: String?
@@ -20,7 +20,7 @@ final class Task {
     var userId: String
     
     init(
-        id: String,
+        id: String = UUID().uuidString,
         title: String,
         notes: String? = nil,
         dueDate: Date? = nil,

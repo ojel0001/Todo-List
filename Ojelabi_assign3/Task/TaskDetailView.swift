@@ -7,11 +7,13 @@
 
 import SwiftUI
 import SwiftData
+import FirebaseFirestore
 
 struct TaskDetailView: View {
     @Bindable var task: Task
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
+    @StateObject private var firestoreService = FirestoreTaskService()
     @State private var showDeleteConfirmation = false
     @State private var isEditing = false
     @State private var editTitle = ""
@@ -35,17 +37,25 @@ struct TaskDetailView: View {
             Section {
                 Toggle("Mark as Completed", isOn: $task.isDone)
                     .tint(task.isDone ? .green: .blue)
+                    .onChange(of: task.isDone) { _ in
+                        firestoreService.updateTask(task)
+                    }
             }
         }
         .navigationTitle(isEditing ? "Editing Task" : "Task Details")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            ToolbarItem (placement: .primaryAction) {
+            ToolbarItem(placement: .primaryAction) {
                 if isEditing {
                     Button("Done") {
-                        saveChanges()
+                        task.title = editTitle
+                        task.notes = editNotes.isEmpty ? nil : editNotes
+                        task.dueDate = editDueDate
+                        task.location = editLocation.isEmpty ? nil : editLocation
+                        task.category = editCategory.isEmpty ? nil : editCategory
+                        firestoreService.updateTask(task)
+                        isEditing = false
                     }
-                    .disabled(editTitle.isEmpty)
                 } else {
                     Menu {
                         Button {
@@ -75,6 +85,7 @@ struct TaskDetailView: View {
         
         .confirmationDialog("Delete Task", isPresented: $showDeleteConfirmation) {
             Button ("Delete Task", role: .destructive) {
+                firestoreService.deleteTask(task)
                 modelContext.delete(task)
                 dismiss()
             }

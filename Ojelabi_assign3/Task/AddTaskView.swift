@@ -7,11 +7,13 @@
 
 import SwiftUI
 import SwiftData
+import FirebaseFirestore
 
   
 struct AddTaskView : View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
+    @StateObject private var firestoreService = FirestoreTaskService()
     let userId: String
     
     @State private var title = ""
@@ -20,6 +22,7 @@ struct AddTaskView : View {
     @State private var location = ""
     @State private var category = ""
     @State private var showDatePicker = false
+    
     
     var body: some View {
         NavigationStack {
@@ -55,6 +58,7 @@ struct AddTaskView : View {
                                 userId: userId
                             )
                             modelContext.insert(task)
+                            firestoreService.createTask(task)
                             dismiss()
                         }
                         .disabled(title.isEmpty)
