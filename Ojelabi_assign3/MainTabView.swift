@@ -13,7 +13,7 @@ struct MainTabView: View {
     
     var body: some View{
         TabView{
-            TaskListView()
+            TaskListView(userId: userId)
                 .tabItem {
                     Label ("Tasks", systemImage: "checkList")
                     
