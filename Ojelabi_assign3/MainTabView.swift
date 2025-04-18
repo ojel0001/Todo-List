@@ -6,13 +6,25 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct MainTabView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+    let userId: String
+    
+    var body: some View{
+        TabView{
+            TaskListView()
+                .tabItem {
+                    Label ("Tasks", systemImage: "checkList")
+                    
+                }
+            
+            ProfileView()
+                .tabItem {
+                    Label("Profile", systemImage: "person")
+                    
+            }
+        }
     }
 }
 
-#Preview {
-    MainTabView()
-}

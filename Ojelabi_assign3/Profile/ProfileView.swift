@@ -11,7 +11,6 @@ struct ProfileView: View {
     @Query private var profiles: [Profile]
     
     var body : some View {
-        
         NavigationStack {
             if let profile = profiles.first {
                 Form {
@@ -60,7 +59,6 @@ struct ProfileView: View {
             }
         }
     }
-    
     
     private func deleteProfile(_ profile: Profile) {
         modelContext.delete(profile)

@@ -6,19 +6,18 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ContentView: View {
+    @Query private var profiles: [Profile]
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        if profiles.first != nil {
+            MainTabView(userId: profiles.first?.userId ?? "")
+        } else {
+            ProgressView("loading...")
+                .onAppear{
+            }
         }
-        .padding()
     }
-}
-
-#Preview {
-    ContentView()
 }
